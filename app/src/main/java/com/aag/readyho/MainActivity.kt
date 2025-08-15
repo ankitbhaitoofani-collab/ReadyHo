@@ -29,6 +29,7 @@ fun AppNavigation() {
         navController = navController,
         startDestination = "login"
     ) {
+
         // Login Screen
         composable("login") {
             LoginScreen(
@@ -47,7 +48,18 @@ fun AppNavigation() {
 
         // Home Screen
         composable("home") {
-            HomeScreen()
+            HomeScreen(
+                onBookRide = { navController.navigate("rideBooking") } // Button click se navigate
+            )
+        }
+
+        // Ride Booking Screen
+        composable("rideBooking") {
+            RideBookingScreen(
+                onConfirmRide = {
+                    // TODO: Ride confirmation logic
+                }
+            )
         }
     }
 }
