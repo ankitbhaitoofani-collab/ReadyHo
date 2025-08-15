@@ -30,7 +30,13 @@ fun RideConfirmationScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { onConfirm() },
+            onClick = { 
+                val success = Backend.addRide(pickup, drop) // Ride store in temporary backend
+                if(success){
+                    println("Ride Confirmed: Pickup=$pickup, Drop=$drop") // Simple debug
+                    onConfirm() // Future logic placeholder
+                }
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Confirm Ride")
