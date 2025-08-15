@@ -24,23 +24,30 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    
-    NavHost(navController = navController, startDestination = "login") {
+
+    NavHost(
+        navController = navController,
+        startDestination = "login"
+    ) {
+        // Login Screen
         composable("login") {
             LoginScreen(
-                onLoginSuccess = { 
-                    // TODO: Navigate to Home screen in future
-                },
+                onLoginSuccess = { navController.navigate("home") },
                 onNavigateToRegister = { navController.navigate("register") }
             )
         }
+
+        // Registration Screen
         composable("register") {
             RegistrationScreen(
-                onRegisterSuccess = { 
-                    // TODO: Navigate to Home screen in future
-                },
+                onRegisterSuccess = { navController.navigate("home") },
                 onNavigateToLogin = { navController.navigate("login") }
             )
+        }
+
+        // Home Screen
+        composable("home") {
+            HomeScreen()
         }
     }
 }
