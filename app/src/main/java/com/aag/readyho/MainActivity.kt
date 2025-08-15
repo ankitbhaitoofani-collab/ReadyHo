@@ -6,9 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,8 +58,28 @@ fun AppNavigation() {
         // Ride Booking Screen
         composable("rideBooking") {
             RideBookingScreen(
-                onConfirmRide = {
-                    // TODO: Ride confirmation logic
+                onConfirmRide = { pickup, drop ->
+                    navController.navigate("rideConfirm/$pickup/$drop")
+                }
+            )
+        }
+
+        // Ride Confirmation Screen
+        composable(
+            "rideConfirm/{pickup}/{drop}",
+            arguments = listOf(
+                navArgument("pickup") { type = NavType.StringType },
+                navArgument("drop") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val pickup = backStackEntry.arguments?.getString("pickup") ?: ""
+            val drop = backStackEntry.arguments?.getString("drop") ?: ""
+            
+            RideConfirmationScreen(
+                pickup = pickup,
+                drop = drop,
+                onConfirm = {
+                    // TODO: Backend call or success message
                 }
             )
         }

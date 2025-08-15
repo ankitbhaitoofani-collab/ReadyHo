@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun RideBookingScreen(
-    onConfirmRide: () -> Unit
+    onConfirmRide: (pickup: String, drop: String) -> Unit
 ) {
     var pickup by remember { mutableStateOf("") }
     var drop by remember { mutableStateOf("") }
@@ -46,7 +46,13 @@ fun RideBookingScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { onConfirmRide() },
+            onClick = { 
+                if(pickup.isNotBlank() && drop.isNotBlank()) {
+                    onConfirmRide(pickup, drop)
+                } else {
+                    // Optional: Show toast/message for empty fields
+                }
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Confirm Ride")
