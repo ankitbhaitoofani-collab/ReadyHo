@@ -1,20 +1,21 @@
 package com.aag.readyho
 
 object Backend {
+
     private val rides = mutableListOf<Ride>()
 
-    data class Ride(
-        val pickup: String,
-        val drop: String
-    )
+    data class Ride(val pickup: String, val drop: String)
 
-    fun addRide(pickup: String, drop: String): Boolean {
-        // Temporary logic: simply add ride to list
-        rides.add(Ride(pickup, drop))
-        return true
+    fun addRide(pickup: String, drop: String) {
+        val ride = Ride(pickup, drop)
+        rides.add(ride)
+        println("Ride Added: Pickup=$pickup, Drop=$drop")
     }
 
-    fun getAllRides(): List<Ride> {
-        return rides
+    fun getRides(): List<Ride> = rides.toList()
+
+    fun clearRides() {
+        rides.clear()
+        println("All rides cleared")
     }
 }

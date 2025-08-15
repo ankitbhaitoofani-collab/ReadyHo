@@ -21,24 +21,11 @@ fun RideConfirmationScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Confirm Your Ride", style = MaterialTheme.typography.headlineMedium)
-
         Spacer(modifier = Modifier.height(24.dp))
-
         Text("Pickup: $pickup", style = MaterialTheme.typography.bodyLarge)
         Text("Drop: $drop", style = MaterialTheme.typography.bodyLarge)
-
         Spacer(modifier = Modifier.height(24.dp))
-
-        Button(
-            onClick = { 
-                val success = Backend.addRide(pickup, drop) // Ride store in temporary backend
-                if(success){
-                    println("Ride Confirmed: Pickup=$pickup, Drop=$drop") // Simple debug
-                    onConfirm() // Future logic placeholder
-                }
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
+        Button(onClick = { onConfirm() }, modifier = Modifier.fillMaxWidth()) {
             Text("Confirm Ride")
         }
     }

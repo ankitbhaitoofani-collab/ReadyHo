@@ -22,14 +22,12 @@ fun RideBookingScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Book Your Ride", style = MaterialTheme.typography.headlineMedium)
-
         Spacer(modifier = Modifier.height(24.dp))
 
         OutlinedTextField(
             value = pickup,
             onValueChange = { pickup = it },
             label = { Text("Pickup Location") },
-            singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -39,22 +37,12 @@ fun RideBookingScreen(
             value = drop,
             onValueChange = { drop = it },
             label = { Text("Drop Location") },
-            singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        Button(
-            onClick = { 
-                if(pickup.isNotBlank() && drop.isNotBlank()) {
-                    onConfirmRide(pickup, drop)
-                } else {
-                    // Optional: Show toast/message for empty fields
-                }
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
+        Button(onClick = { onConfirmRide(pickup, drop) }, modifier = Modifier.fillMaxWidth()) {
             Text("Confirm Ride")
         }
     }

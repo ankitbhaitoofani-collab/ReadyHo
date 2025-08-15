@@ -6,10 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavType
 import androidx.navigation.navArgument
 
 class MainActivity : ComponentActivity() {
@@ -31,8 +31,6 @@ fun AppNavigation() {
         navController = navController,
         startDestination = "login"
     ) {
-
-        // Login Screen
         composable("login") {
             LoginScreen(
                 onLoginSuccess = { navController.navigate("home") },
@@ -40,7 +38,6 @@ fun AppNavigation() {
             )
         }
 
-        // Registration Screen
         composable("register") {
             RegistrationScreen(
                 onRegisterSuccess = { navController.navigate("home") },
@@ -48,23 +45,21 @@ fun AppNavigation() {
             )
         }
 
-        // Home Screen
         composable("home") {
             HomeScreen(
-                onBookRide = { navController.navigate("rideBooking") } // Button click se navigate
+                onBookRide = { navController.navigate("rideBooking") }
             )
         }
 
-        // Ride Booking Screen
         composable("rideBooking") {
             RideBookingScreen(
                 onConfirmRide = { pickup, drop ->
+                    Backend.addRide(pickup, drop)
                     navController.navigate("rideConfirm/$pickup/$drop")
                 }
             )
         }
 
-        // Ride Confirmation Screen
         composable(
             "rideConfirm/{pickup}/{drop}",
             arguments = listOf(
@@ -74,12 +69,12 @@ fun AppNavigation() {
         ) { backStackEntry ->
             val pickup = backStackEntry.arguments?.getString("pickup") ?: ""
             val drop = backStackEntry.arguments?.getString("drop") ?: ""
-            
+
             RideConfirmationScreen(
                 pickup = pickup,
                 drop = drop,
                 onConfirm = {
-                    // TODO: Backend call or success message
+                    // Future backend logic / success message
                 }
             )
         }

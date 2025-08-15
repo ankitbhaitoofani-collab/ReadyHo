@@ -1,14 +1,10 @@
 package com.aag.readyho
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -16,10 +12,6 @@ fun LoginScreen(
     onLoginSuccess: () -> Unit,
     onNavigateToRegister: () -> Unit
 ) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var showPassword by remember { mutableStateOf(false) }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -27,48 +19,20 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("ReadyHo Login", style = MaterialTheme.typography.headlineMedium)
+        Text("Login to ReadyHo", style = MaterialTheme.typography.headlineMedium)
 
         Spacer(modifier = Modifier.height(24.dp))
-
-        OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Email or Phone") },
-            singleLine = true,
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            singleLine = true,
-            visualTransformation = if (showPassword) PasswordVisualTransformation.None else PasswordVisualTransformation(),
-            trailingIcon = {
-                val image = if (showPassword) Icons.Default.Visibility else Icons.Default.VisibilityOff
-                IconButton(onClick = { showPassword = !showPassword }) {
-                    Icon(imageVector = image, contentDescription = null)
-                }
-            },
-            modifier = Modifier.fillMaxWidth()
-        )
+        Text("Username: testuser", style = MaterialTheme.typography.bodyLarge)
+        Text("Password: 1234", style = MaterialTheme.typography.bodyLarge)
 
         Spacer(modifier = Modifier.height(24.dp))
-
-        Button(
-            onClick = { onLoginSuccess() },
-            modifier = Modifier.fillMaxWidth()
-        ) {
+        Button(onClick = { onLoginSuccess() }, modifier = Modifier.fillMaxWidth()) {
             Text("Login")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-
-        TextButton(onClick = { onNavigateToRegister() }) {
-            Text("Don't have an account? Register")
+        OutlinedButton(onClick = { onNavigateToRegister() }, modifier = Modifier.fillMaxWidth()) {
+            Text("Go to Register")
         }
     }
 }

@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun HomeScreen(
-    onBookRide: () -> Unit   // <- Ye lambda RideBookingScreen ke liye
+    onBookRide: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -19,18 +19,10 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Welcome to ReadyHo!", style = MaterialTheme.typography.headlineMedium)
-
         Spacer(modifier = Modifier.height(24.dp))
-
         Text("This is your Home Screen for booking rides.", style = MaterialTheme.typography.bodyLarge)
-
         Spacer(modifier = Modifier.height(24.dp))
-
-        // Ride Booking button
-        Button(
-            onClick = { onBookRide() },
-            modifier = Modifier.fillMaxWidth()
-        ) {
+        Button(onClick = { onBookRide() }, modifier = Modifier.fillMaxWidth()) {
             Text("Book a Ride")
         }
     }
