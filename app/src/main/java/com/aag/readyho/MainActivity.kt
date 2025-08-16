@@ -54,8 +54,10 @@ fun AppNavigation() {
         composable("rideBooking") {
             RideBookingScreen(
                 onConfirmRide = { pickup, drop ->
-                    Backend.addRide(pickup, drop)
-                    navController.navigate("rideConfirm/$pickup/$drop")
+                    if (pickup.isNotBlank() && drop.isNotBlank()) {
+                        Backend.addRide(pickup, drop)
+                        navController.navigate("rideConfirm/$pickup/$drop")
+                    }
                 }
             )
         }
@@ -74,7 +76,7 @@ fun AppNavigation() {
                 pickup = pickup,
                 drop = drop,
                 onConfirm = {
-                    // Future backend logic / success message
+                    // future backend call
                 }
             )
         }
